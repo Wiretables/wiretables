@@ -21,7 +21,7 @@ The package will automatically register its service provider.
 Assets must be published
 
 ````bash
- php artisan vendor:publish --provider="Wiretables\WiretablesServiceProvider"
+php artisan vendor:publish --provider="Wiretables\WiretablesServiceProvider"
 ````
 
 This provide a basic localized template to get started
@@ -86,10 +86,10 @@ All configurations are defined in the ->mount() method
 By default Wiretables will search in all fields, to overwrite this behaviour define the fields
 
 ```php
-    public function mount()
-    {
-        $this->searchFields = ['name'];
-    }
+public function mount()
+{
+    $this->searchFields = ['name'];
+}
 ```
 
 ### Fields
@@ -100,33 +100,33 @@ The key is the name of the field and the value an array of possible configuratio
 #### Column name
 
 ```php
-    $this->fields = [
-        'name' => [
-            'label' => 'Store name',
-        ]
-    ];
+$this->fields = [
+    'name' => [
+        'label' => 'Store name',
+    ]
+];
 ```
 
 #### Hidden fields
 Sometimes you want to return a field and use it but not display it
 
 ```php
-    $this->fields = [
-        'id' => [
-            'display' => false,
-        ]
-    ];
+$this->fields = [
+    'id' => [
+        'display' => false,
+    ]
+];
 ```
 
 #### Date fields
 
 ```php
-    $this->fields = [
-        'created_at' => [
-            'type' => 'date',
-            'type_format' => 'Y-m-d',
-        ]
-    ];
+$this->fields = [
+    'created_at' => [
+        'type' => 'date',
+        'type_format' => 'Y-m-d',
+    ]
+];
 ```
 
 #### Custom field view
@@ -134,12 +134,12 @@ Sometimes you want to return a field and use it but not display it
 Inside the view you have access to all variables. The context related variables are $row, $field, $value
 
 ```php
-    $this->fields = [
-        'email' => [
-            'type' => 'custom',
-            'type_view' => 'wiretables.bootstrap.fields.custom'
-        ],
-    ];
+$this->fields = [
+    'email' => [
+        'type' => 'custom',
+        'type_view' => 'wiretables.bootstrap.fields.custom'
+    ],
+];
 ```
 
 ### Custom fields
@@ -147,12 +147,12 @@ Inside the view you have access to all variables. The context related variables 
 Sometimes you need to add an additional column that does not exist in the database, for example an "actions" column.
 
 ```php
-    $this->customColumns = [
-        'actions' => [
-            'label' => 'Actions',
-            'view' => 'wiretables.bootstrap.fields.actions'
-        ]
-    ];
+$this->customColumns = [
+    'actions' => [
+        'label' => 'Actions',
+        'view' => 'wiretables.bootstrap.fields.actions'
+    ]
+];
 ```
 
 The context related variables in these views are:
@@ -168,28 +168,28 @@ Custom fields are not sortable
 Update the default field (none) by which to sort the default query
 
 ```php
-    public function mount()
-    {
-        $this->sortField = 'name';
-    }
+public function mount()
+{
+    $this->sortField = 'name';
+}
 ```
 
 Disable sorting for a field
 
 ```php
-    $this->fields = [
-        'created_at' => [
-            'sortable' => false
-        ]
-    ];
+$this->fields = [
+    'created_at' => [
+        'sortable' => false
+    ]
+];
 ```
 
 ### Results per page
 
 ```php
-    $this->perPage = 5;
+$this->perPage = 5;
 
-    $this->perPageRanges = [5, 10, 20, 25];
+$this->perPageRanges = [5, 10, 20, 25];
 ```
 
 
