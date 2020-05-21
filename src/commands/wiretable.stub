@@ -1,0 +1,20 @@
+<?php
+
+namespace {{ namespace }};
+
+use Livewire\Component;
+
+class {{ class }} extends Component
+{
+    use \Wiretables\Traits\Wiretable;
+
+    /**
+     * @return \Illuminate\Database\Query\Builder|Illuminate\Database\Eloquent\Builder
+     */
+    protected function model()
+    {
+        // example
+        // return \DB::table('users')->select(['first_name', 'last_name', 'email']);
+        // return \App\Models\User::select(['first_name', 'last_name', 'email']);
+    }
+}

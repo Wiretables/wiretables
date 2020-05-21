@@ -1,0 +1,29 @@
+{
+    "name": "wiretables/wiretables",
+    "description": "Dynamic tables implemented with Livewire",
+    "keywords": ["Laravel", "Livewire", "Wiretables"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandru Muresan",
+            "email": "contact@alexandrumuresan.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Wiretables\\": "src/"
+        }
+    },
+    "require": {
+        "illuminate/support": "7.*",
+        "illuminate/view": "7.*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wiretables\\WiretablesServiceProvider"
+            ]
+        }
+    }
+}
