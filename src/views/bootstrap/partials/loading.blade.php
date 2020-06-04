@@ -1,0 +1,1 @@
+{{ __('wiretables::wiretables.loading') }}

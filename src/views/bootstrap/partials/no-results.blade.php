@@ -1,1 +1,1 @@
-<h4>{{ __('wiretables.no-results') }}</h4>
+<h4>{{ __('wiretables::wiretables.no-results') }}</h4>

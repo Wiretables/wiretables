@@ -72,7 +72,12 @@ trait Wiretable
     /**
      * @var string
      */
-    protected $view = 'wiretables.bootstrap.index';
+    public $view = 'wiretables::bootstrap.index';
+
+    /**
+     * @var string
+     */
+    public $viewNoResults = 'wiretables::bootstrap.partials.no-results';
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -82,16 +87,19 @@ trait Wiretable
         // data
         $paginator = $this->buildPaginator();
 
-        // resolve the table head if missing
-        if (empty($this->table_head))
+        if ($paginator->total() > 0)
         {
-            $this->resolveTableHead($paginator);
-        }
+            // resolve the table head if missing
+            if (empty($this->table_head))
+            {
+                $this->resolveTableHead($paginator);
+            }
 
-        // if no search fields are define we search in all
-        if (empty($this->searchFields))
-        {
-            $this->resolveSearchFields();
+            // if no search fields are define we search in all
+            if (empty($this->searchFields))
+            {
+                $this->resolveSearchFields();
+            }
         }
 
         return view($this->view, [

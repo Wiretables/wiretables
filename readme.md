@@ -195,7 +195,15 @@ $this->perPageRanges = [5, 10, 20, 25];
 
 ### Template
 
-By default Wiretables uses a simple bootstrap 4 template that can be easily updated, all template files are published in /views/wiretables.
+By default Wiretables uses a simple bootstrap 4 template.
+To update/extend the template create a view that extends the main view
+
+```php
+@extends('wiretables::bootstrap.index')
+```
+In the index file you can find all sections that can be extended
+
+To change the view update $this->view
 
 ### Example
 

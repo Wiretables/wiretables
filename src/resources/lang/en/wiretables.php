@@ -7,4 +7,5 @@ return [
     'footer.showing' => 'Showing',
     'footer.to' => 'to',
     'footer.out-of' => 'out of',
+    'loading-of' => 'Loading...',
 ];

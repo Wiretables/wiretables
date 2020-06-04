@@ -1,81 +1,93 @@
 <div>
-    <div class="row mb-4">
-        <div class="col form-inline">
-            @if ($table_data->total() > 0)
-                {{ __('wiretables.per_page') }}: &nbsp;
-                <select wire:model="perPage" class="form-control">
-                    @foreach($perPageRanges as $range)
-                        <option>{{$range}}</option>
-                    @endforeach
-                </select>
-            @endif
-        </div>
 
-        <div class="col">
-            <input wire:model="searchQuery" class="form-control" type="text" placeholder="{{ __('wiretables.search.placeholder') }}" />
-        </div>
+@if ($table_data->total() > 0)
 
+    <div wire:loading>
+        @include($viewNoResults)
     </div>
 
-    @if ($table_data->total() > 0)
+    <div class="mb-4 row">
+        <div class="col-md-6">
+            @section('index.search')
+                <input wire:model="searchQuery" class="form-control" type="text" placeholder="{{ __('wiretables::wiretables.search.placeholder') }}" />
+            @show
+        </div>
 
-        <table class="table">
-            @include('wiretables.bootstrap.partials.table-head')
-            <tbody>
+        <div class="col-md-6">
+            @section('index.per_page')
+                @if ($table_data->total() > 0)
+                    <div class="float-right form-inline">
+                        {{ __('wiretables::wiretables.per_page') }}: &nbsp;
+                        <select wire:model="perPage" class="form-control">
+                            @foreach($perPageRanges as $range)
+                                <option>{{$range}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+            @show
+        </div>
+    </div>
 
-            @foreach($table_data as $row)
-                <tr>
-                    @foreach(\Wiretables\Helper::normalizeRow($row) as $field => $value)
+    <table class="table">
 
-                        @if (!\Wiretables\Helper::isFieldVisible($field, $fields))
-                            @continue
-                        @endif
+        @include('wiretables::bootstrap.partials.table-head')
 
-                        <td>
-                            @if(isset($fields[$field]) AND isset($fields[$field]['type']))
+        <tbody>
 
-                                @switch($fields[$field]['type'])
-                                    @case('date')
-                                        @include('wiretables.bootstrap.fields.date',
-                                        ['field_date' => $value,
-                                         'field_date_format' => $fields[$field]['type_format']])
-                                        @break
-                                    @case('custom')
-                                        @include($fields[$field]['type_view'])
+        @foreach($table_data as $row)
+            <tr>
+                @foreach(\Wiretables\Helper::normalizeRow($row) as $field => $value)
+
+                    @if (!\Wiretables\Helper::isFieldVisible($field, $fields))
+                        @continue
+                    @endif
+
+                    <td>
+                        @if(isset($fields[$field]) AND isset($fields[$field]['type']))
+
+                            @switch($fields[$field]['type'])
+                                @case('date')
+                                    @include('wiretables::bootstrap.fields.date',
+                                    ['field_date' => $value,
+                                     'field_date_format' => $fields[$field]['type_format']])
+                                    @break
+                                @case('custom')
+                                    @include($fields[$field]['type_view'])
                                     @break
 
-                                @endswitch
+                            @endswitch
 
-                            @else
+                        @else
 
-                                {{ $value }}
+                            {{ $value }}
 
-                            @endif
+                        @endif
 
-                        </td>
-                    @endforeach
+                    </td>
+                @endforeach
 
-                    @foreach ($customColumns as $field => $column)
-                        <td>
-                            @include($column['view'])
-                        </td>
-                    @endforeach
+                @foreach ($customColumns as $field => $column)
+                    <td>
+                        @include($column['view'])
+                    </td>
+                @endforeach
 
-                </tr>
-            @endforeach
+            </tr>
+        @endforeach
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
-        {{ $table_data->links() }}
+    {{ $table_data->links() }}
 
-        <div class="col text-right text-muted">
-            {{ __('wiretables.footer.showing') }} {{ $table_data->firstItem() }} {{ __('wiretables.footer.to') }} {{ $table_data->lastItem() }} {{ __('wiretables.footer.out-of') }} {{ $table_data->total() }}
-        </div>
+    <div class="col text-right text-muted">
+        {{ __('wiretables::wiretables.footer.showing') }} {{ $table_data->firstItem() }} {{ __('wiretables::wiretables.footer.to') }} {{ $table_data->lastItem() }} {{ __('wiretables::wiretables.footer.out-of') }} {{ $table_data->total() }}
+    </div>
 
     @else
 
-        @include('wiretables.bootstrap.partials.no-results')
+        @include($viewNoResults)
 
     @endif
 
