@@ -80,6 +80,23 @@ trait Wiretable
     public $viewNoResults = 'wiretables::bootstrap.partials.no-results';
 
     /**
+     * @var string
+     */
+    public $viewNoResultsForFilter = 'wiretables::bootstrap.partials.no-results-filter';
+
+    /**
+     * @var string
+     */
+    public $viewloading = 'wiretables::bootstrap.partials.loading';
+
+    /**
+     * No of DB queries performed, used to determine if we don't have results by default or because of filters
+     *
+     * @var int
+     */
+    public $queries = 0;
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function render()
@@ -185,6 +202,8 @@ trait Wiretable
         {
             $query = $query->orderBy($this->sortField, $this->sortDirection);
         }
+
+        $this->queries++;
 
         return $query
             ->take($this->perPage)

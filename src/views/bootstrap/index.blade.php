@@ -1,35 +1,34 @@
 <div>
 
-@if ($table_data->total() > 0)
+@if ($table_data->total() > 0 OR $queries > 1)
 
-    <div wire:loading>
-        @include($viewNoResults)
-    </div>
+    @section('wiretables.top')
+        <div class="mb-4 row">
+            <div class="col-md-6">
+                @section('wiretables.top.left')
+                    @include('wiretables::bootstrap.partials.search')
+                @show
+            </div>
 
-    <div class="mb-4 row">
-        <div class="col-md-6">
-            @section('index.search')
-                <input wire:model="searchQuery" class="form-control" type="text" placeholder="{{ __('wiretables::wiretables.search.placeholder') }}" />
-            @show
+            <div class="col-md-6">
+                @section('wiretables.top.right')
+                    @include('wiretables::bootstrap.partials.perPage')
+                @show
+            </div>
+        </div>
+    @show
+
+    @section('wiretables.loading')
+
+        <div wire:loading>
+            @include($viewloading)
         </div>
 
-        <div class="col-md-6">
-            @section('index.per_page')
-                @if ($table_data->total() > 0)
-                    <div class="float-right form-inline">
-                        {{ __('wiretables::wiretables.per_page') }}: &nbsp;
-                        <select wire:model="perPage" class="form-control">
-                            @foreach($perPageRanges as $range)
-                                <option>{{$range}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endif
-            @show
-        </div>
-    </div>
+    @show
 
-    <table class="table">
+    @if ($table_data->total() > 0)
+
+    <table class="table" wire:loading.remove>
 
         @include('wiretables::bootstrap.partials.table-head')
 
@@ -55,13 +54,10 @@
                                 @case('custom')
                                     @include($fields[$field]['type_view'])
                                     @break
-
                             @endswitch
 
                         @else
-
                             {{ $value }}
-
                         @endif
 
                     </td>
@@ -79,16 +75,34 @@
         </tbody>
     </table>
 
-    {{ $table_data->links() }}
+    @else
 
-    <div class="col text-right text-muted">
-        {{ __('wiretables::wiretables.footer.showing') }} {{ $table_data->firstItem() }} {{ __('wiretables::wiretables.footer.to') }} {{ $table_data->lastItem() }} {{ __('wiretables::wiretables.footer.out-of') }} {{ $table_data->total() }}
-    </div>
+        @include('wiretables::bootstrap.partials.no-results-filter')
+
+    @endif
+
+    @section('wiretables.footer')
+
+        <div class="mb-4 row" wire:loading.remove>
+            <div class="col-md-6">
+                @section('wiretables.footer.left')
+                    {{ $table_data->links() }}
+                @show
+            </div>
+
+            <div class="col-md-6">
+                @section('wiretables.footer.right')
+                    @include('wiretables::bootstrap.partials.meta')
+                @show
+            </div>
+        </div>
+
+    @show
 
     @else
 
         @include($viewNoResults)
 
-    @endif
+@endif
 
 </div>
