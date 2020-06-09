@@ -28,7 +28,7 @@
 
     @if ($table_data->total() > 0)
 
-    <table class="table" wire:loading.remove>
+    <table class="{{ $tableClass }}" wire:loading.remove>
 
         @include('wiretables::bootstrap.partials.table-head')
 

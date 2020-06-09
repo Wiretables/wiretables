@@ -1,5 +1,5 @@
-<thead class="table-dark">
-<tr class="bg-primary">
+<thead class="{{ $tableHeadClass }}">
+<tr class="{{ $tableHeadTrClass }}">
 
     @foreach($tableHead as $field)
 
@@ -20,7 +20,7 @@
             }
         ?>
 
-        <th scope="col">
+        <th scope="{{ $tableHeadThClass }}">
             <a role="button" href="#" class="text-white"
                @if (!$noSort)
                     wire:click.prevent="sortBy('{{ $field }}')"

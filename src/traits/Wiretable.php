@@ -97,6 +97,26 @@ trait Wiretable
     public $queries = 0;
 
     /**
+     * @var string
+     */
+    public $tableClass = 'table';
+
+    /**
+     * @var string
+     */
+    public $tableHeadClass = 'table-dark';
+
+    /**
+     * @var string
+     */
+    public $tableHeadTrClass = 'bg-primary';
+
+    /**
+     * @var string
+     */
+    public $tableHeadThClass = 'col';
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function render()
