@@ -24,7 +24,6 @@ Assets must be published
 php artisan vendor:publish --provider="Wiretables\WiretablesServiceProvider"
 ````
 
-This provide a basic localized template to get started
 
 ## Usage
 
