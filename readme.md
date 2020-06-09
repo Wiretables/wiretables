@@ -18,12 +18,6 @@ $ composer require wiretables/wiretables
 
 The package will automatically register its service provider.
 
-Assets must be published
-
-````bash
-php artisan vendor:publish --provider="Wiretables\WiretablesServiceProvider"
-````
-
 
 ## Usage
 
