@@ -21,7 +21,7 @@
         ?>
 
         <th scope="{{ $tableHeadThClass }}">
-            <a role="button" href="#" class="text-white"
+            <a href="#" class="text-white"
                @if (!$noSort)
                     wire:click.prevent="sortBy('{{ $field }}')"
                 @endif
