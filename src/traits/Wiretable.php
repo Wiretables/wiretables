@@ -13,6 +13,8 @@ trait Wiretable
 {
     use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
+
     /**
      * @var array
      */
@@ -99,7 +101,7 @@ trait Wiretable
     /**
      * @var string
      */
-    public $tableClass = 'table';
+    public $tableClass = 'table table-striped';
 
     /**
      * @var string
@@ -114,7 +116,7 @@ trait Wiretable
     /**
      * @var string
      */
-    public $tableHeadThClass = 'col';
+    public $tableHeadThClass = '';
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

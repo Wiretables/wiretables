@@ -1,5 +1,7 @@
 <div>
 
+@yield('wiretables.before')
+
 @if ($table_data->total() > 0 OR $queries > 1)
 
     @section('wiretables.top')
@@ -42,7 +44,15 @@
                         @continue
                     @endif
 
-                    <td>
+                    <td
+                            @if(isset($fields[$field]) AND isset($fields[$field]['style']))
+                                style="{{ $fields[$field]['style'] }}"
+                            @endif
+
+                            @if(isset($fields[$field]) AND isset($fields[$field]['class']))
+                                class="{{ $fields[$field]['class'] }}"
+                            @endif
+                    >
                         @if(isset($fields[$field]) AND isset($fields[$field]['type']))
 
                             @switch($fields[$field]['type'])
@@ -50,6 +60,10 @@
                                     @include('wiretables::bootstrap.fields.date',
                                     ['field_date' => $value,
                                      'field_date_format' => $fields[$field]['type_format']])
+                                    @break
+                                @case('link')
+                                    @include('wiretables::bootstrap.fields.link',
+                                     ['field_link' => $fields[$field]['link']])
                                     @break
                                 @case('custom')
                                     @include($fields[$field]['type_view'])
@@ -99,9 +113,9 @@
 
     @show
 
-    @else
+@else
 
-        @include($viewNoResults)
+    @include($viewNoResults)
 
 @endif
 

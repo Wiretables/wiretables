@@ -198,6 +198,15 @@ To update/extend the template create a view that extends the main view
 @extends('wiretables::bootstrap.index')
 ```
 
+A few configurations are possible to easily add classes to the table
+
+```php
+$this->tableClass = $this->tableClass . ' table-responsive-sm';
+$this->tableHeadClass = '';
+$this->tableHeadTrClass = '';
+$this->tableHeadThClass = '';
+```
+
 And update $this->view
 
 In the index file you can find all sections that can be extended

@@ -20,7 +20,7 @@
             }
         ?>
 
-        <th scope="{{ $tableHeadThClass }}">
+        <th class="{{ $tableHeadThClass }}">
             <a href="#" class="text-white"
                @if (!$noSort)
                     wire:click.prevent="sortBy('{{ $field }}')"
